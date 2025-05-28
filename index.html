@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Oswald:wght@200..700&family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
+<title>Fashion Site Idea</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to left, rgb(88, 88, 88), rgb(105, 104, 104), rgb(235, 227, 227));
+}
+ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 10px 20px;
+    background: linear-gradient(to left, rgb(197, 197, 197), rgb(139, 138, 138), rgb(218, 213, 213));
+    border-radius: 30px;
+    gap: 20px;
+}
+li {
+    flex: 1;
+    text-align: center;
+}
+li a {
+    text-decoration: none;
+    color: white;
+    padding: 8px;
+    display: inline-block;
+}
+.search-bar {
+    flex: 2;
+}
+.search-bar input {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    width: 70%;
+    margin-left: 30px;
+}
+.slider {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    position: relative;
+    height: 400px;
+}
+.galeria {
+    position: center;
+    display: flex;
+    width: 90%;
+    height: 400px;
+    margin-left: 200px;
+    border-radius: 20px;
+    margin: 0 auto;
+    overflow: visible;
+    perspective: 800px;
+    margin-top: -57px;
+}
+.galeria img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0.4;
+    z-index: 0;
+    transition: all 0.5s ease;
+}
+#radio1:checked ~ .galeria img:nth-child(1),
+#radio2:checked ~ .galeria img:nth-child(2),
+#radio3:checked ~ .galeria img:nth-child(3) {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 2;
+}
+#radio1:checked ~ .galeria img:nth-child(2),
+#radio2:checked ~ .galeria img:nth-child(3),
+#radio3:checked ~ .galeria img:nth-child(1) {
+    transform: translate(calc(-50% + 150px), -50%) scale(0.5);
+    opacity: 0.4;
+    z-index: 1;
+}
+#radio1:checked ~ .galeria img:nth-child(3),
+#radio2:checked ~ .galeria img:nth-child(1),
+#radio3:checked ~ .galeria img:nth-child(2) {
+    transform: translate(calc(-50% - 150px), -50%) scale(0.5);
+    opacity: 0.4;
+    z-index: 1;
+}
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    left:50%;
+    transform: translateX(-50%) translateY(-150px);
+}
+.navigation-manual {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.manual-btn {
+    border: 2px solid #242323;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.manual-btn:hover {
+    background: black;
+}
+#radio1:checked ~ .navigation-manual label[for="radio1"],
+#radio2:checked ~ .navigation-manual label[for="radio2"],
+#radio3:checked ~ .navigation-manual label[for="radio3"] {
+   background-image: linear-gradient(to bottom, rgb(59, 59, 59), rgb(99, 99, 99), rgb(94, 93, 93), rgb(92, 92, 92));
+   border: 1px solid rgb(43, 42, 42);
+}
+.row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.row p{
+    flex: 1;
+}
+.row img {
+    width: 150px;
+    object-fit: contain;
+}
+.container{
+    margin-top: 286px;
+}
+.container p {
+   text-align: right;
+   margin-left:46%;
+   margin-top: 130px;
+   color: rgb(190, 189, 189);
+   width: auto;
+   height: 10px;
+   border-top-right-radius: 30px;
+   display:inline-block;
+   font-family: "EB Garamond", serif;
+   font-optical-sizing: auto;
+   font-size: 16px;
+   font-style: normal;
+}
+.prefacio {
+    background-color: rgb(71, 40, 11);
+    color: rgb(204, 201, 201);
+    box-shadow: 10px 1px 25px black;
+    text-align: center;
+    padding: 10px;
+    margin: 20px auto;
+    margin-top: -30px;
+    width: 30%;
+ font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+ 
+ font-size: 10px;
+  
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+}
+#img-frente {
+   position: absolute;
+   left: -500px;
+   top: 60%;
+   width: 454px;
+   
+   z-index: 3;
+   opacity: 4;
+   margin-left: 60%;
+   margin-top: 130%;
+  
+}
+#img-fundo {
+    transform: scaleX(-1) rotate(-13deg);
+    left: -500px;
+    position: absolute;
+    left: 0;
+    margin-top: 347px;
+    margin-left: -74px;
+    top: 20%;
+    width: 540px;
+    animation: aparecer 5s forwards;
+    z-index: 1;
+}
+.cabecalho {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  margin-top: 400px;
+  background-color: black;
+  padding-top: 7px;
+  border: 2px solid white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.titulo-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.titulo-box h2 {
+  font-size: 20px;
+  color: white;
+}
+.circulo-com-texto {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.circulo-com-texto svg {
+  z-index: 2;
+}
+.circulo-com-texto .texto-circulo {
+  position: absolute;
+  color: gray;
+  font-size: 10px;
+  white-space: nowrap;
+  transform: translateX(-50%) translateY(-50%);
+  left: 50%;
+  top: 50%;
+}
+h2{
+    color: white;
+}
+#p1{
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 25px;
+    padding-right:25px;
+        font-family: "Ancizar Serif", serif;
+  font-optical-sizing: 10px;
+  font-size: 14px;
+  font-weight: <weight>;
+  font-style: normal;
+  
+}
+#p2, #p3,#p5,#p4{
+  
+    height: auto;
+    width: 250px;
+    vertical-align: top;
+    font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+#p2{
+    padding-left: 27%;
+}
+   .bloco {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: relative;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.imagem-com-texto {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+#sem-fundo {
+  width: 120px;
+  height: auto;
+  background-color: white;
+  border-radius: 60%;
+  margin-left: 46%;
+  margin-top: -270px;
+ display: flex;
+}
+
+#p3{
+  margin-top: -120px;
+ 
+  
+}
+#p4{
+  margin-top: -160px;
+  padding-left: 20px;
+  text-align: center;
+  border-right: 1px solid white;
+}
+#p5{
+  margin-left: 70%;
+  margin-top: -230px;
+  display: flex;
+}
+#p2{
+    margin-left: 10%;
+}
+section{
+    background-color: black;
+    margin-top: -10px;
+}
+.conteudo {
+  padding: 40px 20px;
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+}
+
+
+.topo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px
+
+}
+#m,#s,#t,#e{
+   color: rgb(102, 62, 25);
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+    
+}
+
+
+footer{
+  background-image: linear-gradient(to right, brown, brown, rgb(151, 98, 18)6, 165, 42, black);
+  height: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+
+
+@keyframes aparecer {
+    to {
+        left: 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<ul>
+    <li id="m">Moda</li>
+    <li id="s">Sofisticação</li>
+    
+        <li id="t"> Tendências</li>
+        <li id="e">Estilo </li>
+</ul>
+
+<header>
+<div class="slider">
+    <input type="radio" name="radio-btn" id="radio1" checked>
+    <input type="radio" name="radio-btn" id="radio2">
+    <input type="radio" name="radio-btn" id="radio3">
+    <div class="galeria">
+        <img src="depositphotos_69111191-stock-photo-fashion-show.jpg" alt="Imagem 1">
+        <img src="images (9) (26).jpeg" alt="Imagem 2">
+        <img src="images (13).jpeg" alt="Imagem 3">
+    </div>
+    <div class="navigation-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+    </div>
+</div>
+</header>
+
+<nav class="navbar">
+<p class="prefacio">Moda é expressão silenciosa de quem somos.
+</p>
+</nav>
+
+<div class="container">
+<p>Cada traço, textura e detalhe revelam, sutilmente,<br> a essência de quem sabe  se destacar sem jamais precisar se explicar.</p>
+</div>
+
+
+<img id="img-fundo" src="BackgroundEraser_20250520_170058625.png" alt="">
+<br><br><br><br>
+<header class="cabecalho">
+   
+  <h2>Artigo</h2>
+  <div class="circulo-com-texto">
+    <svg viewBox="0 0 200 200" width="100" height="80">
+      <defs>
+        <path id="textoCircular" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/>
+      </defs>
+      <text fill="gray" font-size="10" font-family="Arial" letter-spacing="1">
+        <textPath href="#textoCircular" startOffset="0">
+          MODA CONTEMPORÂNEA • MODA CONTEMPORÂNEA • MODA CONTEMPORÂNEA • 
+        </textPath>
+      </text>
+      <circle cx="100" cy="100" r="20" fill="white" stroke="black" stroke-width="3.2"/>
+    </svg>
+  </div>
+</header>
+
+<hr>
+
+ <section class="conteudo">
+
+ 
+  <div class="topo">
+    <p id="p1">
+      A moda contemporânea feminina vai muito além de tendências passageiras; ela representa a liberdade de escolha, a diversidade e a expressão da identidade.<br>
+      Em constante evolução, ela acompanha as mudanças sociais, culturais e tecnológicas, refletindo os desejos e necessidades da mulher atual.
+    </p>
+  </div>
+
+  <div class="meio">
+    <p id="p2">
+      A moda contemporânea reflete diversidade; a liberdade <br>
+      de se expor e a quebra <br> de velhos padrões. A <br>
+      busca pelo realce <br> deixa que cada um <br>
+      mostre sua forma <br> na forma de seu ser. <br>
+      Tendenciando o palco <br> para a rua. Além disso, <br>
+      o entrelace de estilo com sofisticação revela o ideal que  
+      uma moda à frente de seu tempo precisa.
+    </p>
+    <img id="sem-fundo" src="semfundosection.png" alt="Imagem sem fundo">
+  </div>
+
+  <div class="base-inferior">
+   
+  </div>
+   
+<p id="p4">
+      Um aspecto marcante da moda nova é a valorização da inclusão.<br>
+      Marcas têm nos apresentado coleções para diferentes corpos.<br>
+      Promovendo uma representatividade cada vez maior no mercado.<br>
+      Assim, a moda nova não é apenas estética.<br>
+      Mas também um meio de comunicação e transformação social.
+    </p>
+
+    <p id="p5">A elegância dela é sutil, quase etérea, carregada de uma melancolia delicada que se revela em cada gesto contido. Há uma beleza serena em sua postura, como se guardasse histórias não contadas e sentimentos profundos sob a superfície. Essa combinação de graça e tristeza confere a ela uma aura única, onde a sofisticação encontra a emoção, criando um charme que toca quem a observa de maneira silenciosa e inesquecível.
+</p>
+
+
+
+</section>
+  <footer>
+    <p>@andrey_damas</p>
+    &copy; a.fDamas/01809 
+  </footer>
+
+<script>
+  let counter = 1;
+  const totalSlides = 3;
+
+  function showSlide(n) {
+    document.getElementById('radio' + n).checked = true;
+    counter = n;
+  }
+
+  function nextSlide() {
+    counter++;
+    if (counter > totalSlides) counter = 1;
+    showSlide(counter);
+  }
+
+  let slideInterval = setInterval(nextSlide, 4000);
+
+  const radios = document.querySelectorAll('input[name="radio-btn"]');
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4000);
+    });
+  });
+</script>
+</body>
+</html>
+
+
+
